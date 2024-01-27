@@ -16,7 +16,8 @@ import Header from "./header/header";
 // import SideNavigation from "./header/SideBar";
 import Sidebar from './header/headerFront';
 import Annonce from './annonce/AnnonceFront';
-
+import Historique from './historique/Historique';
+import Favoris from './favoris/Favoris';
 function App(){
   const styles = {
     contentDiv: {
@@ -29,33 +30,17 @@ function App(){
   };
   return(
     <>
-  {/* <div style={styles.contentDiv}>
-    <div style={styles.contentMargin}>
-    <Router>
-      <Routes>
-          <Route exact path="/" element= {<Liste/>} />
-          <Route path="/Annonce" element= {<Liste/>} />
-          <Route path ="/Detail" element={<Detail/>}/>
+      <div>
+      <Router>
+          <Routes>
+              <Route exact path="/Annonce" element= {<Annonce/>} />
+              <Route path ="/Detail" element={<Detail/>}/>
+              <Route path="/Historique" element={<Historique/>} />
+              <Route path="/Favoris" element={<Favoris/>} />
 
-          <Route path="/Categorie" element={<Categorie/>} />
-          <Route path="/Energie" element={<Energie/>} />
-          <Route path="/Marque" element={<Marque/>} />
-          <Route path="/Vitesse" element={<BoiteVitesse/>} />
-          <Route path="/Moteur" element={<Moteur/>} />
-          <Route path ="/Statistique" element={<Statistque/>}/>
-      </Routes>
-    </Router>
-    </div>
-  </div> */}
-
-  <div>
-  <Router>
-      <Routes>
-          <Route exact path="/" element= {<Annonce/>} />
-          
-      </Routes>
-    </Router>
-  </div>  
+          </Routes>
+        </Router>
+      </div>  
   </>
   );
 }

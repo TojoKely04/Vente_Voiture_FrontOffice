@@ -1,19 +1,20 @@
-import React from "react";
-import HeaderFront from '../header/headerFront';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 import { COLOR } from "rsuite/esm/utils/constants";
+import HeaderFront from '../header/headerFront';
 
-function Annonce(){
+function historique(){
     return(
-        <div>
+        <>
         <div>
             <HeaderFront />
         </div>
-        <div  className="container">
+        <div>
+        <div className="container">
               <Row xs={1} md={2} className="g-4">
               {Array.from({ length: 2 }).map((_, idx) => (
                 <Col key={idx}>
@@ -34,7 +35,9 @@ function Annonce(){
               ))}
             </Row>
         </div>
+        
         </div>
+        </>
     );
 }
-export default Annonce; 
+export default historique; 

@@ -5,11 +5,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Header from '../header/header';
 import { Label , Input, Form, FormGroup, Container } from 'reactstrap';
-
+import HeaderFront from '../header/headerFront';
 function Detail(){
     return(
         <div>
-            <Header/>
+            <HeaderFront/>
             <Container>
             <Row xs={1} md={1} className="g-4" >
             {Array.from({ length: 1 }).map((_, idx) => (
@@ -34,8 +34,7 @@ function Detail(){
                         <p>Enérgie :</p>
                         <p>Prix de vente :</p>
                         <p>Auteur: </p>
-                        <Button variant="success">Accepter</Button>{' '}
-                        <Button variant="danger">Refuser</Button>{' '}
+                        <Button variant="primary">CONTACTER</Button>{' '}
                 </Card.Text>
                 </Card.Body>
                 </div>
