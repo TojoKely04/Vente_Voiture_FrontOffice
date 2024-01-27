@@ -20,6 +20,7 @@ const Example = ({ active, onSelect, ...props }) => {
          <Nav.Item eventKey="5"><Link to="/Statistique/Marque" style={{textDecoration:'none'}}>Par rapport au marque</Link></Nav.Item>
          <Nav.Item eventKey="6"><Link to="/Statistique/Prix" style={{textDecoration:'none'}}>par rapport au prix</Link></Nav.Item>
        </Nav.Menu>
+       
      </Nav>
    </Navbar>
   );
