@@ -33,9 +33,10 @@ function App(){
       <div>
       <Router>
           <Routes>
+              <Route exact path ="/" element={<Annonce />} />
               <Route exact path="/Annonce" element= {<Annonce/>} />
-              <Route path ="/Detail" element={<Detail/>}/>
-              <Route path="/Historique" element={<Historique/>} />
+              <Route path ="/Detail/:id" element={<Detail/>}/>
+              <Route path="/Historique/:id" element={<Historique/>} />
               <Route path="/Favoris" element={<Favoris/>} />
 
           </Routes>

@@ -6,38 +6,54 @@ import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 import { COLOR } from "rsuite/esm/utils/constants";
 import HeaderFront from '../header/headerFront';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useParams } from "react-router-dom";
+import {useState , useEffect} from 'react';
 
-function historique(){
-    return(
-        <>
-        <div>
-            <HeaderFront />
-        </div>
-        <div>
-        <div className="container">
-              <Row xs={1} md={2} className="g-4">
-              {Array.from({ length: 2 }).map((_, idx) => (
-                <Col key={idx}>
-                  <Card>
-                    <Card.Img variant="top" src="holder.js/100px160" />
-                    <Card.Body>
-                      <Card.Title><p>Nom :</p></Card.Title>
-                      <Card.Text>
-                      <p>Categorie : </p>
-                      <p>Marque :</p>
-                      <p>Auteur : </p>
-                      </Card.Text>
-                      <Button variant="primary"><Link to="/Detail" style={{textDecoration:'none' ,  color:'white'}}>Plus d'informations</Link></Button>
-                      <Button variant="success"style={{marginLeft:"15px"}}>Ajouter favoris</Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-        </div>
-        
-        </div>
-        </>
-    );
+const Liste = () => {
+  const { id } = useParams();
+  const [groups, setGroups] = useState([]);
+
+  useEffect(() => {
+      axios.get('/annonces/Utilisateur/'+id)
+        .then(response => {
+              console.log(response.data);
+              setGroups(response.data);
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des posts:', error);
+        });
+  }, []);
+
+   
+  const groupList = groups.map(group => {
+    return<>
+        {Array.from({ length: 1 }).map((_, idx) => (
+          <Col key={idx}>
+            <Card>
+              <Card.Img variant="top" src="holder.js/100px160" />
+              <Card.Body>
+                <Card.Title><p>Nom : {group.nom}</p></Card.Title>
+                <Card.Text>
+                <p>Categorie : {group.categorie.categorie}</p>
+                <p>Marque : {group.marque.marque}</p>
+                <p>Auteur : {group.utilisateur.nom} </p>
+                </Card.Text>
+                <Button variant="primary"><Link style={{textDecoration:'none' ,  color:'white'}} tag={Link} to={"/Detail/" + group.idAnnonce}>Plus d'informations</Link></Button>
+                <Button variant="success"style={{marginLeft:"15px"}}>Ajouter favoris</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+     </>
+});
+
+return(
+  <>
+      <HeaderFront />
+      {groupList}
+  </>
+);
 }
-export default historique; 
+export default Liste; 
