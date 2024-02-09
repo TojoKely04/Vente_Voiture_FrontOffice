@@ -1,22 +1,24 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 import { COLOR } from "rsuite/esm/utils/constants";
-import HeaderFront from '../header/headerFront';
+import Header from '../header/headerFront';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import {useState , useEffect} from 'react';
+import { Container , Button , Breadcrumb , BreadcrumbItem} from 'reactstrap';
+import car from '../assets/image/car.jpg';
+
 
 const Liste = () => {
-  const { id } = useParams();
+  const { token } = useParams();
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
-      axios.get('/annonces/Utilisateur/'+id)
+      axios.get('https://ventevoitureback-production.up.railway.app/annonces/Utilisateur/'+token)
         .then(response => {
               console.log(response.data);
               setGroups(response.data);
@@ -27,33 +29,39 @@ const Liste = () => {
   }, []);
 
    
-  const groupList = groups.map(group => {
-    return<>
-        {Array.from({ length: 1 }).map((_, idx) => (
-          <Col key={idx}>
-            <Card>
-              <Card.Img variant="top" src="holder.js/100px160" />
-              <Card.Body>
-                <Card.Title><p>Nom : {group.nom}</p></Card.Title>
-                <Card.Text>
-                <p>Categorie : {group.categorie.categorie}</p>
-                <p>Marque : {group.marque.marque}</p>
-                <p>Auteur : {group.utilisateur.nom} </p>
-                </Card.Text>
-                <Button variant="primary"><Link style={{textDecoration:'none' ,  color:'white'}} tag={Link} to={"/Detail/" + group.idAnnonce}>Plus d'informations</Link></Button>
-                <Button variant="success"style={{marginLeft:"15px"}}>Ajouter favoris</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-     </>
-});
+ const groupList = groups.map(group => {
+        return <>
+        
+          {Array.from({ length: 1 }).map((_, idx) => (
+            <Col key={idx}>
+              <Card style={{ boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', transition: '0.3s' }}>
+                <Card.Img variant="top" src={car} />
+                <Card.Body>
+                  <Card.Text>
+                  <p>Nom : {group.nom}</p>
+                  <p>Catégories : {group.categorie.categorie}</p>
+                  <p>Marque :{group.marque.marque}</p>
+                  <p>Date de publication :{group.datePublication}</p>
+                  <p>Auteur : {group.utilisateur.nom}</p>
+                  </Card.Text>
+                  <Button variant="primary" tag={Link} to={"/Detail/" + group.idAnnonce}>Plus de détails</Button>
 
-return(
-  <>
-      <HeaderFront />
-      {groupList}
-  </>
-);
+                  </Card.Body>
+              </Card>
+            </Col>
+          ))} 
+        </>
+    });
+    return ( 
+    <>    
+      <Header/>
+      <Container  style={{marginLeft:'90px'}}>
+      <h2 className="ajout--title"> Vos Annonces </h2>
+        <Row xs={1} md={3} className="g-4" >
+          {groupList}     
+        </Row>
+      </Container>
+    </>
+    );
 }
 export default Liste; 
