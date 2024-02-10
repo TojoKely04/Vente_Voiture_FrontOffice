@@ -52,7 +52,6 @@ const Liste = () => {
                   <p>Auteur : {group.utilisateur.nom}</p>
                   </Card.Text>
                   <Button variant="primary" tag={Link} to={"/Detail/" + group.idAnnonce}>Plus de détails</Button>
-                  <Button variant="primary" tag={Link} to={"/Detail/" + group.idAnnonce}>Contacter</Button>
                   <Button onClick={()=>ajouterFavoris(group.idAnnonce)} variant="success" style={{marginLeft:"15px"}}>Ajouter favoris</Button>
                   </Card.Body>
               </Card>
